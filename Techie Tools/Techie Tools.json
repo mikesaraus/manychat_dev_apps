@@ -1,0 +1,820 @@
+{
+    "auth": null,
+    "actions": [
+        {
+            "name": "qrcode_generator",
+            "forms": [
+                {
+                    "name": "qrcode_content",
+                    "type": "string",
+                    "title": "Content"
+                },
+                {
+                    "name": "qrcode_format",
+                    "type": "select",
+                    "title": "Format",
+                    "source": "qrcode_formats",
+                    "default": "png"
+                },
+                {
+                    "name": "qrcode_size",
+                    "type": "number",
+                    "title": "Size [min: 250, max: 1000]",
+                    "default": 300
+                },
+                {
+                    "name": "qrcode_color",
+                    "type": "string",
+                    "title": "Color",
+                    "default": "000"
+                },
+                {
+                    "name": "qrcode_bgcolor",
+                    "type": "string",
+                    "title": "Background Color",
+                    "default": "fff"
+                }
+            ],
+            "title": "QR Code Generator",
+            "guidance": "Use URL Encode to avoid problems with special characters and spaces.\nImage Formats are jpg, jpeg, png and gif. Default is png.\nSize must be in range, 250 minimum to 1000 maximum. Default is 300.\nColor format: RGB ([0-255]-[0-255]-[0-255]) or Hex value in short format ([a-fA-F] three chars, e.g. fff for white) or long format ([a-fA-F] six chars, e.g. ff0000 for red).",
+            "requests": [
+                {
+                    "url": "https://cleanuri.com/api/v1/shorten",
+                    "method": "POST",
+                    "headers": [
+                        "Content-Type: application/json"
+                    ],
+                    "mapping": [
+                        {
+                            "name": "qrcode_url",
+                            "path": "$.result_url",
+                            "type": "string",
+                            "title": "QR Code URL"
+                        }
+                    ],
+                    "payload": {
+                        "url": "https://api.qrserver.com/v1/create-qr-code?qzone=1&margin=1&format=[[qrcode_format]]&size=[[qrcode_size]]x[[qrcode_size]]&color=[[qrcode_color]]&bgcolor=[[qrcode_bgcolor]]&data=[[qrcode_content]]"
+                    }
+                }
+            ],
+            "description": "Create a custom qr code"
+        },
+        {
+            "name": "qrcode_reader",
+            "forms": [
+                {
+                    "name": "qrcode_url",
+                    "type": "string",
+                    "title": "QR Code URL"
+                }
+            ],
+            "title": "QR Code Reader",
+            "guidance": "Please use URL Shortener for long url.",
+            "requests": [
+                {
+                    "url": "https://api.qrserver.com/v1/read-qr-code/?fileurl=[[qrcode_url]]",
+                    "method": "GET",
+                    "headers": [
+                        "Content-Type: application/json"
+                    ],
+                    "mapping": [
+                        {
+                            "name": "qrcode_content",
+                            "path": "$[0].symbol[0].data",
+                            "type": "string",
+                            "title": "QR Code Content"
+                        }
+                    ],
+                    "payload": null
+                }
+            ],
+            "description": "Read qr code content from url"
+        },
+        {
+            "name": "url_shortener",
+            "forms": [
+                {
+                    "name": "input_url",
+                    "type": "string",
+                    "title": "Long URL"
+                }
+            ],
+            "title": "URL Shortener",
+            "guidance": "Use URL Encode to avoid problems with special characters and spaces.",
+            "requests": [
+                {
+                    "url": "https://cleanuri.com/api/v1/shorten",
+                    "method": "POST",
+                    "headers": [
+                        "Content-Type: application/json"
+                    ],
+                    "mapping": [
+                        {
+                            "name": "result_url",
+                            "path": "$.result_url",
+                            "type": "string",
+                            "title": "Shortened URL"
+                        }
+                    ],
+                    "payload": {
+                        "url": "[[input_url]]"
+                    }
+                }
+            ],
+            "description": "Return a nice, clean, shortened url"
+        },
+        {
+            "name": "check_dispossable_mail",
+            "forms": [
+                {
+                    "name": "input_email",
+                    "type": "string",
+                    "title": "Email Address"
+                }
+            ],
+            "title": "Check Dispossable Email",
+            "guidance": "Provide the email address to check and it will return 1 (true) if email address is dispossable, and return null (nothing) if not dispossable.\nNote: It will NOT check if email is valid, it will only check for email's domain if on dispossable list.",
+            "requests": [
+                {
+                    "url": "https://open.kickbox.com/v1/disposable/[[input_email]]",
+                    "method": "GET",
+                    "headers": [
+                        "Content-Type: application/json"
+                    ],
+                    "mapping": [
+                        {
+                            "name": "disposable",
+                            "path": "$.disposable",
+                            "type": "string",
+                            "title": "Dispossable [1 or null]"
+                        }
+                    ],
+                    "payload": null
+                }
+            ],
+            "description": "Check if email address is dispossable"
+        },
+        {
+            "name": "filter_text",
+            "forms": [
+                {
+                    "name": "input",
+                    "type": "string",
+                    "title": "Text Content"
+                },
+                {
+                    "name": "input_replace",
+                    "type": "string",
+                    "title": "Text to Replace [comma separated]"
+                },
+                {
+                    "name": "input_replacement",
+                    "type": "string",
+                    "title": "Text New Value",
+                    "default": ""
+                }
+            ],
+            "title": "Filter Text",
+            "guidance": "Text Content\n• Input text to be processed.\nText to Replace\n• A comma separated list of words to be added to the profanity list. Accepts letters, numbers, underscores (_) and commas (,). Accepts up to 10 words (or 200 maximum characters in length). The filter is case-insensitive, so the case of your entry is not important.\nText New Value\n• Text used to replace any words matching the profanity list. Accepts letters, numbers, underscores (_) tildes (~), exclamation points (!), dashes/hyphens (-), equal signs (=), pipes (|), single quotes ('), double quotes (\"), asterisks (*), open and closed curly brackets ({}), square brackets ([]) and parentheses (). Maximum length of 20 characters. When not used, the default is an asterisk (*) fill, note that text between 2 asterisk (*) will be formated as bold in messenger.",
+            "requests": [
+                {
+                    "url": "https://www.purgomalum.com/service/json?text=[[input]]&add=[[input_replace]]&fill_text=[[input_replacement]]",
+                    "method": "GET",
+                    "headers": [
+                        "Content-Type: application/json"
+                    ],
+                    "mapping": [
+                        {
+                            "name": "result",
+                            "path": "$.result",
+                            "type": "string",
+                            "title": "New Text Content"
+                        }
+                    ],
+                    "payload": null
+                }
+            ],
+            "description": "Search and replace text/words"
+        },
+        {
+            "name": "generate_token",
+            "forms": [],
+            "title": "Generate Token",
+            "guidance": "",
+            "requests": [
+                {
+                    "url": "https://some-random-api.ml/bottoken",
+                    "method": "GET",
+                    "headers": [
+                        "Content-Type: application/json"
+                    ],
+                    "mapping": [
+                        {
+                            "name": "result",
+                            "path": "$.token",
+                            "type": "string",
+                            "title": "Random Token"
+                        }
+                    ],
+                    "payload": null
+                }
+            ],
+            "description": "Return a random token"
+        },
+        {
+            "name": "random_number",
+            "forms": [
+                {
+                    "name": "random_number_min",
+                    "type": "number",
+                    "title": "Min Number [default: 1]",
+                    "default": 1
+                },
+                {
+                    "name": "random_number_max",
+                    "type": "number",
+                    "title": "Max Number [default: 100]",
+                    "default": 100
+                }
+            ],
+            "title": "Random Number",
+            "guidance": "",
+            "requests": [
+                {
+                    "url": "https://csrng.net/csrng/csrng.php?min=[[random_number_min]]&max=[[random_number_max]]",
+                    "method": "GET",
+                    "headers": [
+                        "Content-Type: application/json"
+                    ],
+                    "mapping": [
+                        {
+                            "name": "random_number_result",
+                            "path": "$[0].random",
+                            "type": "number",
+                            "title": "Random Number"
+                        }
+                    ],
+                    "payload": null
+                }
+            ],
+            "description": "Return a random number"
+        },
+        {
+            "name": "random_word",
+            "forms": [],
+            "title": "Random Word",
+            "guidance": "",
+            "requests": [
+                {
+                    "url": "https://random-word-api.herokuapp.com/word?number=5",
+                    "method": "GET",
+                    "headers": [
+                        "Content-Type: application/json"
+                    ],
+                    "mapping": [
+                        {
+                            "name": "result_word1",
+                            "path": "$[0]",
+                            "type": "string",
+                            "title": "Random Word 1"
+                        },
+                        {
+                            "name": "result_word2",
+                            "path": "$[1]",
+                            "type": "string",
+                            "title": "Random Word 2"
+                        },
+                        {
+                            "name": "result_word3",
+                            "path": "$[2]",
+                            "type": "string",
+                            "title": "Random Word 3"
+                        },
+                        {
+                            "name": "result_word4",
+                            "path": "$[3]",
+                            "type": "string",
+                            "title": "Random Word 4"
+                        },
+                        {
+                            "name": "result_word5",
+                            "path": "$[4]",
+                            "type": "string",
+                            "title": "Random Word 5"
+                        }
+                    ],
+                    "payload": null
+                }
+            ],
+            "description": "Return a random word"
+        },
+        {
+            "name": "random_answer",
+            "forms": [
+                {
+                    "name": "force_answer",
+                    "type": "select",
+                    "title": "Force Answer",
+                    "source": "force_answers",
+                    "default": "random"
+                }
+            ],
+            "title": "Random Answer",
+            "guidance": "You can force an answer to yes, no or maybe.\nIf force answer is empty it will return a random answer (yes or no only).",
+            "requests": [
+                {
+                    "url": "https://yesno.wtf/api?force=[[force_answer]]",
+                    "method": "GET",
+                    "headers": [
+                        "Content-Type: application/json"
+                    ],
+                    "mapping": [
+                        {
+                            "name": "answer_result",
+                            "path": "$.answer",
+                            "type": "string",
+                            "title": "Answer"
+                        },
+                        {
+                            "name": "answer_image",
+                            "path": "$.image",
+                            "type": "string",
+                            "title": "Gif Image"
+                        }
+                    ],
+                    "payload": null
+                }
+            ],
+            "description": "Return a random yes or no with gif"
+        },
+        {
+            "name": "hit_counter",
+            "forms": [
+                {
+                    "name": "input_host_key",
+                    "type": "number",
+                    "title": "Host Key",
+                    "default": "{{page_id}}"
+                },
+                {
+                    "name": "input_counter_key",
+                    "type": "number",
+                    "title": "Counter Key"
+                }
+            ],
+            "title": "Hit Counter",
+            "guidance": "This is action is using your Page Id as Host Key to create a unique counter for each and every page.\nIt will increment the hit count of the Counter Key. You can use Get Counter to get the total hit count of the Key.\nAccepted Key: RegEx = /^[A-Za-z0-9_\\-.]{3,64}$/",
+            "requests": [
+                {
+                    "url": "https://api.countapi.xyz/hit/[[input_host_key]]/[[input_counter_key]]",
+                    "method": "GET",
+                    "headers": [
+                        "Content-Type: application/json"
+                    ],
+                    "mapping": [
+                        {
+                            "name": "counter_result",
+                            "path": "$.value",
+                            "type": "number",
+                            "title": "Current Hit Count"
+                        }
+                    ],
+                    "payload": null
+                }
+            ],
+            "description": "Increase counter key hit count by 1"
+        },
+        {
+            "name": "get_counter",
+            "forms": [
+                {
+                    "name": "input_host_key",
+                    "type": "number",
+                    "title": "Host Key",
+                    "default": "{{page_id}}"
+                },
+                {
+                    "name": "input_counter_key",
+                    "type": "string",
+                    "title": "Counter Key"
+                }
+            ],
+            "title": "Get Counter",
+            "guidance": "This is action is using your Page Id as Host Key to create a unique counter for each and every page.\nIt will return the total Hit Count of the Counter Key...see also Hit Counter.\nAccepted Counter Key: RegEx = /^[A-Za-z0-9_\\-.]{3,64}$/",
+            "requests": [
+                {
+                    "url": "https://api.countapi.xyz/get/[[input_host_key]]/[[input_counter_key]]",
+                    "method": "GET",
+                    "headers": [
+                        "Content-Type: application/json"
+                    ],
+                    "mapping": [
+                        {
+                            "name": "counter_result",
+                            "path": "$.value",
+                            "type": "number",
+                            "title": "Total Hit Count"
+                        }
+                    ],
+                    "payload": null
+                }
+            ],
+            "description": "Get counter key total hit count"
+        },
+        {
+            "name": "url_encode",
+            "forms": [
+                {
+                    "name": "input",
+                    "type": "string",
+                    "title": "URL String"
+                }
+            ],
+            "title": "URL Encode",
+            "guidance": "",
+            "requests": [
+                {
+                    "url": "https://api.justyy.workers.dev/api/urlencode?s=[[input]]",
+                    "method": "GET",
+                    "headers": [
+                        "Content-Type: application/json"
+                    ],
+                    "mapping": [
+                        {
+                            "name": "result",
+                            "path": "$",
+                            "type": "string",
+                            "title": "URL Encoded"
+                        }
+                    ],
+                    "payload": null
+                }
+            ],
+            "description": "URL Encode a string"
+        },
+        {
+            "name": "url_decode",
+            "forms": [
+                {
+                    "name": "input",
+                    "type": "string",
+                    "title": "URL Encoded String"
+                }
+            ],
+            "title": "URL Decode",
+            "guidance": "",
+            "requests": [
+                {
+                    "url": "https://api.justyy.workers.dev/api/urldecode?s=[[input]]",
+                    "method": "GET",
+                    "headers": [
+                        "Content-Type: application/json"
+                    ],
+                    "mapping": [
+                        {
+                            "name": "result",
+                            "path": "$",
+                            "type": "string",
+                            "title": "URL Decoded"
+                        }
+                    ],
+                    "payload": null
+                }
+            ],
+            "description": "URL Decode an encoded string"
+        },
+        {
+            "name": "binary_encode",
+            "forms": [
+                {
+                    "name": "input",
+                    "type": "string",
+                    "title": "String to Encode"
+                }
+            ],
+            "title": "Binary Encode",
+            "guidance": "",
+            "requests": [
+                {
+                    "url": "https://some-random-api.ml/binary?text=[[input]]",
+                    "method": "GET",
+                    "headers": [
+                        "Content-Type: application/json"
+                    ],
+                    "mapping": [
+                        {
+                            "name": "result",
+                            "path": "$.binary",
+                            "type": "string",
+                            "title": "Binary Result"
+                        }
+                    ],
+                    "payload": null
+                }
+            ],
+            "description": "Encode string to binary"
+        },
+        {
+            "name": "binary_decode",
+            "forms": [
+                {
+                    "name": "input",
+                    "type": "string",
+                    "title": "Binary to Decode"
+                }
+            ],
+            "title": "Binary Decode",
+            "guidance": "",
+            "requests": [
+                {
+                    "url": "https://some-random-api.ml/binary?decode=[[input]]",
+                    "method": "GET",
+                    "headers": [
+                        "Content-Type: application/json"
+                    ],
+                    "mapping": [
+                        {
+                            "name": "result",
+                            "path": "$.text",
+                            "type": "string",
+                            "title": "Decoded Result"
+                        }
+                    ],
+                    "payload": null
+                }
+            ],
+            "description": "Decode binary string"
+        },
+        {
+            "name": "base64_encode",
+            "forms": [
+                {
+                    "name": "input",
+                    "type": "string",
+                    "title": "String to Encode"
+                }
+            ],
+            "title": "Base64 Encode",
+            "guidance": "",
+            "requests": [
+                {
+                    "url": "https://some-random-api.ml/base64?encode=[[input]]",
+                    "method": "GET",
+                    "headers": [
+                        "Content-Type: application/json"
+                    ],
+                    "mapping": [
+                        {
+                            "name": "result",
+                            "path": "$.base64",
+                            "type": "string",
+                            "title": "Base64 Result"
+                        }
+                    ],
+                    "payload": null
+                }
+            ],
+            "description": "Encode string to base64"
+        },
+        {
+            "name": "base64_decode",
+            "forms": [
+                {
+                    "name": "input",
+                    "type": "string",
+                    "title": "Base64 to Decode"
+                }
+            ],
+            "title": "Base64 Decode",
+            "guidance": "",
+            "requests": [
+                {
+                    "url": "https://some-random-api.ml/base64?decode=[[input]]",
+                    "method": "GET",
+                    "headers": [
+                        "Content-Type: application/json"
+                    ],
+                    "mapping": [
+                        {
+                            "name": "result",
+                            "path": "$.text",
+                            "type": "string",
+                            "title": "Decoded Result"
+                        }
+                    ],
+                    "payload": null
+                }
+            ],
+            "description": "Decode base64 string"
+        },
+        {
+            "name": "encode_morse",
+            "forms": [
+                {
+                    "name": "input",
+                    "type": "string",
+                    "title": "Message"
+                }
+            ],
+            "title": "Encode Morse Code",
+            "guidance": "",
+            "requests": [
+                {
+                    "url": "https://api.funtranslations.com/translate/morse.json?text=[[input]]",
+                    "method": "GET",
+                    "headers": [
+                        "Content-Type: application/json"
+                    ],
+                    "mapping": [
+                        {
+                            "name": "result",
+                            "path": "$.contents.translated",
+                            "type": "string",
+                            "title": "Morse Code"
+                        }
+                    ],
+                    "payload": null
+                }
+            ],
+            "description": "From text to morse code"
+        },
+        {
+            "name": "decode_morse",
+            "forms": [
+                {
+                    "name": "input",
+                    "type": "string",
+                    "title": "Morse Code"
+                }
+            ],
+            "title": "Decode Morse Code",
+            "guidance": "",
+            "requests": [
+                {
+                    "url": "https://api.funtranslations.com/translate/morse2english.json?text=[[input]]",
+                    "method": "GET",
+                    "headers": [
+                        "Content-Type: application/json"
+                    ],
+                    "mapping": [
+                        {
+                            "name": "result",
+                            "path": "$.contents.translated",
+                            "type": "string",
+                            "title": "Message"
+                        }
+                    ],
+                    "payload": null
+                }
+            ],
+            "description": "From morse code to text"
+        },
+        {
+            "name": "rgb_hex",
+            "forms": [
+                {
+                    "name": "input",
+                    "type": "string",
+                    "title": "RGB Color"
+                }
+            ],
+            "title": "RGB to Hex",
+            "guidance": "Provide R,G,B color value.\nSample RGB Color: 255,255,255\nSample Response: #FFFFFF",
+            "requests": [
+                {
+                    "url": "https://some-random-api.ml/canvas/hex?rgb=[[input]]",
+                    "method": "GET",
+                    "headers": [
+                        "Content-Type: application/json"
+                    ],
+                    "mapping": [
+                        {
+                            "name": "result",
+                            "path": "$.hex",
+                            "type": "string",
+                            "title": "Hex Value"
+                        }
+                    ],
+                    "payload": null
+                }
+            ],
+            "description": "Convert RGB to Hex"
+        },
+        {
+            "name": "hex_rgb",
+            "forms": [
+                {
+                    "name": "input",
+                    "type": "string",
+                    "title": "Hex Color"
+                }
+            ],
+            "title": "Hex to RGB",
+            "guidance": "Provide a valid hex color value without #.\nSample Hex Color: FFFFFF\nSample Response: Red=255, Green=255, Blue=255",
+            "requests": [
+                {
+                    "url": "https://some-random-api.ml/canvas/rgb?hex=[[input]]",
+                    "method": "GET",
+                    "headers": [
+                        "Content-Type: application/json"
+                    ],
+                    "mapping": [
+                        {
+                            "name": "red",
+                            "path": "$.r",
+                            "type": "number",
+                            "title": "Red"
+                        },
+                        {
+                            "name": "green",
+                            "path": "$.g",
+                            "type": "number",
+                            "title": "Green"
+                        },
+                        {
+                            "name": "blue",
+                            "path": "$.b",
+                            "type": "number",
+                            "title": "Blue"
+                        }
+                    ],
+                    "payload": null
+                }
+            ],
+            "description": "Convert Hex to RGB"
+        },
+        {
+            "name": "number_to_english",
+            "forms": [
+                {
+                    "name": "input_num",
+                    "type": "number",
+                    "title": "Number"
+                }
+            ],
+            "title": "Number to English",
+            "guidance": "Enter any positive or negative number with NO decimal places.",
+            "requests": [
+                {
+                    "url": "https://api.justyy.workers.dev/api/convert-number-to-english?n=[[input_num]]",
+                    "method": "GET",
+                    "headers": [
+                        "Content-Type: application/json"
+                    ],
+                    "mapping": [
+                        {
+                            "name": "result",
+                            "path": "$.english",
+                            "type": "string",
+                            "title": "English"
+                        }
+                    ],
+                    "payload": null
+                }
+            ],
+            "description": "Convert arabic numerals to english"
+        }
+    ],
+    "sources": [
+        {
+            "list": [
+                {
+                    "key": "jpg",
+                    "value": "jpg"
+                },
+                {
+                    "key": "jpeg",
+                    "value": "jpeg"
+                },
+                {
+                    "key": "png",
+                    "value": "png"
+                },
+                {
+                    "key": "gif",
+                    "value": "gif"
+                }
+            ],
+            "name": "qrcode_formats",
+            "type": "enum:static"
+        },
+        {
+            "list": [
+                {
+                    "key": "yes",
+                    "value": "yes"
+                },
+                {
+                    "key": "no",
+                    "value": "no"
+                },
+                {
+                    "key": "maybe",
+                    "value": "maybe"
+                }
+            ],
+            "name": "force_answers",
+            "type": "enum:static"
+        }
+    ]
+}
