@@ -1,0 +1,199 @@
+{
+    "auth": null,
+    "actions": [
+        {
+            "name": "covid19_global",
+            "forms": [],
+            "title": "Global Status",
+            "guidance": "",
+            "requests": [
+                {
+                    "url": "https://covid-api.mmediagroup.fr/v1/cases?country=Global",
+                    "method": "GET",
+                    "headers": [
+                        "Content-Type: application/json"
+                    ],
+                    "mapping": [
+                        {
+                            "name": "cv_population",
+                            "path": "$.All.population",
+                            "type": "number",
+                            "title": "Population"
+                        },
+                        {
+                            "name": "cv_confirmed",
+                            "path": "$.All.confirmed",
+                            "type": "number",
+                            "title": "Confirmed"
+                        },
+                        {
+                            "name": "cv_recovered",
+                            "path": "$.All.recovered",
+                            "type": "number",
+                            "title": "Recovered"
+                        },
+                        {
+                            "name": "cv_deaths",
+                            "path": "$.All.deaths",
+                            "type": "number",
+                            "title": "Deaths"
+                        }
+                    ],
+                    "payload": null
+                }
+            ],
+            "description": "Covid19 global cases"
+        },
+        {
+            "name": "covid19_status",
+            "forms": [
+                {
+                    "name": "covid19_country",
+                    "type": "number",
+                    "title": "Enter Country Name ~",
+                    "default": ""
+                },
+                {
+                    "name": "select_covid19_country",
+                    "type": "select",
+                    "title": "or Select Country ~",
+                    "source": "country_list",
+                    "default": ""
+                }
+            ],
+            "title": "Per Country Status",
+            "guidance": "",
+            "requests": [
+                {
+                    "url": "https://covid-api.mmediagroup.fr/v1/cases?country=[[covid19_country]][[select_covid19_country]]",
+                    "method": "GET",
+                    "headers": [
+                        "Content-Type: application/json"
+                    ],
+                    "mapping": [
+                        {
+                            "name": "cv_updated",
+                            "path": "$.All.updated",
+                            "type": "string",
+                            "title": "Date Updated"
+                        },
+                        {
+                            "name": "cv_confirmed",
+                            "path": "$.All.confirmed",
+                            "type": "number",
+                            "title": "Confirmed"
+                        },
+                        {
+                            "name": "cv_recovered",
+                            "path": "$.All.recovered",
+                            "type": "number",
+                            "title": "Recovered"
+                        },
+                        {
+                            "name": "cv_deaths",
+                            "path": "$.All.deaths",
+                            "type": "number",
+                            "title": "Deaths"
+                        },
+                        {
+                            "name": "cv_population",
+                            "path": "$.All.population",
+                            "type": "number",
+                            "title": "Population"
+                        },
+                        {
+                            "name": "cv_sq_km_area",
+                            "path": "$.All.sq_km_area",
+                            "type": "number",
+                            "title": "Land Area (square km)"
+                        },
+                        {
+                            "name": "cv_life_expectancy",
+                            "path": "$.All.life_expectancy",
+                            "type": "number",
+                            "title": "Life Expectancy"
+                        },
+                        {
+                            "name": "cv_elevation_in_meters",
+                            "path": "$.All.elevation_in_meters",
+                            "type": "number",
+                            "title": "Elevation (meters)"
+                        },
+                        {
+                            "name": "cv_country",
+                            "path": "$.All.country",
+                            "type": "string",
+                            "title": "Country"
+                        },
+                        {
+                            "name": "cv_abbreviation",
+                            "path": "$.All.abbreviation",
+                            "type": "string",
+                            "title": "Abbreviation"
+                        },
+                        {
+                            "name": "cv_capital_city",
+                            "path": "$.All.capital_city",
+                            "type": "string",
+                            "title": "Capital City"
+                        },
+                        {
+                            "name": "cv_continent",
+                            "path": "$.All.continent",
+                            "type": "string",
+                            "title": "Continent"
+                        },
+                        {
+                            "name": "cv_location",
+                            "path": "$.All.location",
+                            "type": "string",
+                            "title": "Location"
+                        },
+                        {
+                            "name": "cv_iso",
+                            "path": "$.All.iso",
+                            "type": "number",
+                            "title": "ISO"
+                        },
+                        {
+                            "name": "cv_lat",
+                            "path": "$.All.lat",
+                            "type": "number",
+                            "title": "Latitude"
+                        },
+                        {
+                            "name": "cv_long",
+                            "path": "$.All.long",
+                            "type": "number",
+                            "title": "Longitude"
+                        }
+                    ],
+                    "payload": null
+                }
+            ],
+            "description": "Covid19 cases per country"
+        }
+    ],
+    "sources": [
+        {
+            "name": "country_list",
+            "type": "enum:rpc",
+            "request": {
+                "url": "https://raw.githubusercontent.com/M-Media-Group/country-json/master/src/countries-master.json",
+                "method": "GET",
+                "headers": [
+                    "Content-Type: application/json"
+                ],
+                "mapping": [
+                    {
+                        "type": "select",
+                        "path": "$",
+                        "key": "$.country",
+                        "value": "$.country"
+                    }
+                ],
+                "payload": null
+            }
+        }
+    ]
+}
