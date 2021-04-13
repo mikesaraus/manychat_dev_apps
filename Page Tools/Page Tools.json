@@ -1,0 +1,1638 @@
+{
+    "auth": {
+        "type": "APIKEY",
+        "params": [
+            {
+                "name": "manychat_page_api",
+                "title": "Please enter your Manychat Page API Key"
+            }
+        ],
+        "connection": {
+            "headers": {
+                "Authorization": "Bearer [[manychat_page_api]]",
+                "accept": "application/json"
+            }
+        }
+    },
+    "actions": [
+        {
+            "name": "page_getinfo",
+            "forms": [],
+            "title": "Page Info",
+            "guidance": "",
+            "requests": [
+                {
+                    "url": "https://api.manychat.com/fb/page/getInfo",
+                    "method": "GET",
+                    "headers": [],
+                    "mapping": [
+                        {
+                            "name": "page_id",
+                            "path": "$.data.id",
+                            "type": "number",
+                            "title": "Page Id"
+                        },
+                        {
+                            "name": "page_name",
+                            "path": "$.data.name",
+                            "type": "string",
+                            "title": "Page Name"
+                        },
+                        {
+                            "name": "page_category",
+                            "path": "$.data.category",
+                            "type": "string",
+                            "title": "Category"
+                        },
+                        {
+                            "name": "page_avatar_link",
+                            "path": "$.data.avatar_link",
+                            "type": "string",
+                            "title": "Avatar Link"
+                        },
+                        {
+                            "name": "page_username",
+                            "path": "$.data.username",
+                            "type": "string",
+                            "title": "Page Username"
+                        },
+                        {
+                            "name": "page_about",
+                            "path": "$.data.about",
+                            "type": "string",
+                            "title": "About Page"
+                        },
+                        {
+                            "name": "page_description",
+                            "path": "$.data.description",
+                            "type": "string",
+                            "title": "Page Description"
+                        },
+                        {
+                            "name": "page_is_pro",
+                            "path": "$.data.is_pro",
+                            "type": "string",
+                            "title": "Page isPro"
+                        },
+                        {
+                            "name": "page_timezone",
+                            "path": "$.data.timezone",
+                            "type": "string",
+                            "title": "Timezone"
+                        }
+                    ],
+                    "payload": null
+                }
+            ],
+            "description": "Get page info"
+        },
+        {
+            "name": "find_subscriber_by_id",
+            "forms": [
+                {
+                    "name": "subscriber_id",
+                    "type": "number",
+                    "title": "Subscriber Id"
+                }
+            ],
+            "title": "Find Subscriber by Id",
+            "guidance": "",
+            "requests": [
+                {
+                    "url": "https://api.manychat.com/fb/subscriber/getInfo?subscriber_id=[[subscriber_id]]",
+                    "method": "GET",
+                    "headers": [],
+                    "mapping": [
+                        {
+                            "name": "response_status",
+                            "path": "$.status",
+                            "type": "string",
+                            "title": "Response Status"
+                        },
+                        {
+                            "name": "subscriber_id",
+                            "path": "$.data.id",
+                            "type": "number",
+                            "title": "Subscriber Id"
+                        },
+                        {
+                            "name": "subscriber_status",
+                            "path": "$.data.status",
+                            "type": "string",
+                            "title": "Subscriber Status"
+                        },
+                        {
+                            "name": "first_name",
+                            "path": "$.data.first_name",
+                            "type": "string",
+                            "title": "First Name"
+                        },
+                        {
+                            "name": "last_name",
+                            "path": "$.data.last_name",
+                            "type": "string",
+                            "title": "Last Name"
+                        },
+                        {
+                            "name": "full_name",
+                            "path": "$.data.name",
+                            "type": "string",
+                            "title": "Full Name"
+                        },
+                        {
+                            "name": "gender",
+                            "path": "$.data.gender",
+                            "type": "string",
+                            "title": "Gender"
+                        },
+                        {
+                            "name": "profile_pic",
+                            "path": "$.data.profile_pic",
+                            "type": "string",
+                            "title": "Profile Pic"
+                        },
+                        {
+                            "name": "locale",
+                            "path": "$.data.locale",
+                            "type": "string",
+                            "title": "Locale"
+                        },
+                        {
+                            "name": "language",
+                            "path": "$.data.language",
+                            "type": "string",
+                            "title": "Language"
+                        },
+                        {
+                            "name": "timezone",
+                            "path": "$.data.timezone",
+                            "type": "string",
+                            "title": "Timezone"
+                        },
+                        {
+                            "name": "live_chat_url",
+                            "path": "$.data.live_chat_url",
+                            "type": "string",
+                            "title": "Live Chat URL"
+                        },
+                        {
+                            "name": "last_input_text",
+                            "path": "$.data.last_input_text",
+                            "type": "string",
+                            "title": "Last Input Text"
+                        },
+                        {
+                            "name": "optin_phone",
+                            "path": "$.data.optin_phone",
+                            "type": "string",
+                            "title": "Optin Phone"
+                        },
+                        {
+                            "name": "phone",
+                            "path": "$.data.phone",
+                            "type": "string",
+                            "title": "Phone"
+                        },
+                        {
+                            "name": "optin_email",
+                            "path": "$.data.optin_email",
+                            "type": "string",
+                            "title": "Optin Email"
+                        },
+                        {
+                            "name": "email",
+                            "path": "$.data.email",
+                            "type": "string",
+                            "title": "Email"
+                        },
+                        {
+                            "name": "subscribed",
+                            "path": "$.data.subscribed",
+                            "type": "string",
+                            "title": "Subscribed"
+                        },
+                        {
+                            "name": "last_interaction",
+                            "path": "$.data.last_interaction",
+                            "type": "string",
+                            "title": "Last Interaction"
+                        },
+                        {
+                            "name": "last_seen",
+                            "path": "$.data.last_seen",
+                            "type": "string",
+                            "title": "Last Seen"
+                        },
+                        {
+                            "name": "is_followup_enabled",
+                            "path": "$.data.is_followup_enabled",
+                            "type": "string",
+                            "title": "Is Followup Enabled"
+                        }
+                    ],
+                    "payload": null
+                }
+            ],
+            "description": "Return subscriber info"
+        },
+        {
+            "name": "find_subscriber_by_name",
+            "forms": [
+                {
+                    "name": "subscriber_name",
+                    "type": "string",
+                    "title": "Subscriber Name"
+                }
+            ],
+            "title": "Find Subscriber by Full Name",
+            "guidance": "",
+            "requests": [
+                {
+                    "url": "https://api.manychat.com/fb/subscriber/findByName?name=[[subscriber_name]]",
+                    "method": "GET",
+                    "headers": [],
+                    "mapping": [
+                        {
+                            "name": "response_status",
+                            "path": "$.status",
+                            "type": "string",
+                            "title": "Response Status"
+                        },
+                        {
+                            "name": "subscriber_id",
+                            "path": "$.data[0].id",
+                            "type": "number",
+                            "title": "Subscriber Id"
+                        },
+                        {
+                            "name": "subscriber_status",
+                            "path": "$.data[0].status",
+                            "type": "string",
+                            "title": "Subscriber Status"
+                        },
+                        {
+                            "name": "first_name",
+                            "path": "$.data[0].first_name",
+                            "type": "string",
+                            "title": "First Name"
+                        },
+                        {
+                            "name": "last_name",
+                            "path": "$.data[0].last_name",
+                            "type": "string",
+                            "title": "Last Name"
+                        },
+                        {
+                            "name": "full_name",
+                            "path": "$.data[0].name",
+                            "type": "string",
+                            "title": "Full Name"
+                        },
+                        {
+                            "name": "gender",
+                            "path": "$.data[0].gender",
+                            "type": "string",
+                            "title": "Gender"
+                        },
+                        {
+                            "name": "profile_pic",
+                            "path": "$.data[0].profile_pic",
+                            "type": "string",
+                            "title": "Profile Pic"
+                        },
+                        {
+                            "name": "locale",
+                            "path": "$.data[0].locale",
+                            "type": "string",
+                            "title": "Locale"
+                        },
+                        {
+                            "name": "language",
+                            "path": "$.data[0].language",
+                            "type": "string",
+                            "title": "Language"
+                        },
+                        {
+                            "name": "timezone",
+                            "path": "$.data[0].timezone",
+                            "type": "string",
+                            "title": "Timezone"
+                        },
+                        {
+                            "name": "live_chat_url",
+                            "path": "$.data[0].live_chat_url",
+                            "type": "string",
+                            "title": "Live Chat URL"
+                        },
+                        {
+                            "name": "last_input_text",
+                            "path": "$.data[0].last_input_text",
+                            "type": "string",
+                            "title": "Last Input Text"
+                        },
+                        {
+                            "name": "optin_phone",
+                            "path": "$.data[0].optin_phone",
+                            "type": "string",
+                            "title": "Optin Phone"
+                        },
+                        {
+                            "name": "phone",
+                            "path": "$.data[0].phone",
+                            "type": "string",
+                            "title": "Phone"
+                        },
+                        {
+                            "name": "optin_email",
+                            "path": "$.data[0].optin_email",
+                            "type": "string",
+                            "title": "Optin Email"
+                        },
+                        {
+                            "name": "email",
+                            "path": "$.data[0].email",
+                            "type": "string",
+                            "title": "Email"
+                        },
+                        {
+                            "name": "subscribed",
+                            "path": "$.data[0].subscribed",
+                            "type": "string",
+                            "title": "Subscribed"
+                        },
+                        {
+                            "name": "last_interaction",
+                            "path": "$.data[0].last_interaction",
+                            "type": "string",
+                            "title": "Last Interaction"
+                        },
+                        {
+                            "name": "last_seen",
+                            "path": "$.data[0].last_seen",
+                            "type": "string",
+                            "title": "Last Seen"
+                        },
+                        {
+                            "name": "is_followup_enabled",
+                            "path": "$.data[0].is_followup_enabled",
+                            "type": "string",
+                            "title": "Is Followup Enabled"
+                        }
+                    ],
+                    "payload": null
+                }
+            ],
+            "description": "Return first result match with name"
+        },
+        {
+            "name": "find_subscriber_by_custom_field",
+            "forms": [
+                {
+                    "name": "field_id",
+                    "type": "number",
+                    "title": "Enter Custom Field Id ~",
+                    "default": ""
+                },
+                {
+                    "name": "select_field_id",
+                    "type": "select",
+                    "title": "or Select Custom Field ~",
+                    "source": "custom_fields_id",
+                    "default": ""
+                },
+                {
+                    "name": "field_value",
+                    "type": "string",
+                    "title": "Field Value to Search"
+                }
+            ],
+            "title": "Find Subscriber by Custom Field",
+            "guidance": "",
+            "requests": [
+                {
+                    "url": "https://api.manychat.com/fb/subscriber/findByCustomField?field_id=[[field_id]][[select_field_id]]&field_value=[[field_value]]",
+                    "method": "GET",
+                    "headers": [],
+                    "mapping": [
+                        {
+                            "name": "response_status",
+                            "path": "$.status",
+                            "type": "string",
+                            "title": "Response Status"
+                        },
+                        {
+                            "name": "subscriber_id",
+                            "path": "$.data[0].id",
+                            "type": "number",
+                            "title": "Subscriber Id"
+                        },
+                        {
+                            "name": "subscriber_status",
+                            "path": "$.data[0].status",
+                            "type": "string",
+                            "title": "Subscriber Status"
+                        },
+                        {
+                            "name": "first_name",
+                            "path": "$.data[0].first_name",
+                            "type": "string",
+                            "title": "First Name"
+                        },
+                        {
+                            "name": "last_name",
+                            "path": "$.data[0].last_name",
+                            "type": "string",
+                            "title": "Last Name"
+                        },
+                        {
+                            "name": "full_name",
+                            "path": "$.data[0].name",
+                            "type": "string",
+                            "title": "Full Name"
+                        },
+                        {
+                            "name": "gender",
+                            "path": "$.data[0].gender",
+                            "type": "string",
+                            "title": "Gender"
+                        },
+                        {
+                            "name": "profile_pic",
+                            "path": "$.data[0].profile_pic",
+                            "type": "string",
+                            "title": "Profile Pic"
+                        },
+                        {
+                            "name": "locale",
+                            "path": "$.data[0].locale",
+                            "type": "string",
+                            "title": "Locale"
+                        },
+                        {
+                            "name": "language",
+                            "path": "$.data[0].language",
+                            "type": "string",
+                            "title": "Language"
+                        },
+                        {
+                            "name": "timezone",
+                            "path": "$.data[0].timezone",
+                            "type": "string",
+                            "title": "Timezone"
+                        },
+                        {
+                            "name": "live_chat_url",
+                            "path": "$.data[0].live_chat_url",
+                            "type": "string",
+                            "title": "Live Chat URL"
+                        },
+                        {
+                            "name": "last_input_text",
+                            "path": "$.data[0].last_input_text",
+                            "type": "string",
+                            "title": "Last Input Text"
+                        },
+                        {
+                            "name": "optin_phone",
+                            "path": "$.data[0].optin_phone",
+                            "type": "string",
+                            "title": "Optin Phone"
+                        },
+                        {
+                            "name": "phone",
+                            "path": "$.data[0].phone",
+                            "type": "string",
+                            "title": "Phone"
+                        },
+                        {
+                            "name": "optin_email",
+                            "path": "$.data[0].optin_email",
+                            "type": "string",
+                            "title": "Optin Email"
+                        },
+                        {
+                            "name": "email",
+                            "path": "$.data[0].email",
+                            "type": "string",
+                            "title": "Email"
+                        },
+                        {
+                            "name": "subscribed",
+                            "path": "$.data[0].subscribed",
+                            "type": "string",
+                            "title": "Subscribed"
+                        },
+                        {
+                            "name": "last_interaction",
+                            "path": "$.data[0].last_interaction",
+                            "type": "string",
+                            "title": "Last Interaction"
+                        },
+                        {
+                            "name": "last_seen",
+                            "path": "$.data[0].last_seen",
+                            "type": "string",
+                            "title": "Last Seen"
+                        },
+                        {
+                            "name": "is_followup_enabled",
+                            "path": "$.data[0].is_followup_enabled",
+                            "type": "string",
+                            "title": "Is Followup Enabled"
+                        }
+                    ],
+                    "payload": null
+                }
+            ],
+            "description": "Return first result match with field value"
+        },
+        {
+            "name": "find_subscriber_by_system_field",
+            "forms": [
+                {
+                    "name": "email",
+                    "type": "string",
+                    "title": "Email",
+                    "default": ""
+                },
+                {
+                    "name": "phone",
+                    "type": "string",
+                    "title": "Phone",
+                    "default": ""
+                }
+            ],
+            "title": "Find Subscriber by System Field",
+            "guidance": "",
+            "requests": [
+                {
+                    "url": "https://api.manychat.com/fb/subscriber/findBySystemField?email=[[email]]&phone=[[phone]]",
+                    "method": "GET",
+                    "headers": [],
+                    "mapping": [
+                        {
+                            "name": "response_status",
+                            "path": "$.status",
+                            "type": "string",
+                            "title": "Response Status"
+                        },
+                        {
+                            "name": "subscriber_id",
+                            "path": "$.data.id",
+                            "type": "number",
+                            "title": "Subscriber Id"
+                        },
+                        {
+                            "name": "subscriber_status",
+                            "path": "$.data.status",
+                            "type": "string",
+                            "title": "Subscriber Status"
+                        },
+                        {
+                            "name": "first_name",
+                            "path": "$.data.first_name",
+                            "type": "string",
+                            "title": "First Name"
+                        },
+                        {
+                            "name": "last_name",
+                            "path": "$.data.last_name",
+                            "type": "string",
+                            "title": "Last Name"
+                        },
+                        {
+                            "name": "full_name",
+                            "path": "$.data.name",
+                            "type": "string",
+                            "title": "Full Name"
+                        },
+                        {
+                            "name": "gender",
+                            "path": "$.data.gender",
+                            "type": "string",
+                            "title": "Gender"
+                        },
+                        {
+                            "name": "profile_pic",
+                            "path": "$.data.profile_pic",
+                            "type": "string",
+                            "title": "Profile Pic"
+                        },
+                        {
+                            "name": "locale",
+                            "path": "$.data.locale",
+                            "type": "string",
+                            "title": "Locale"
+                        },
+                        {
+                            "name": "language",
+                            "path": "$.data.language",
+                            "type": "string",
+                            "title": "Language"
+                        },
+                        {
+                            "name": "timezone",
+                            "path": "$.data.timezone",
+                            "type": "string",
+                            "title": "Timezone"
+                        },
+                        {
+                            "name": "live_chat_url",
+                            "path": "$.data.live_chat_url",
+                            "type": "string",
+                            "title": "Live Chat URL"
+                        },
+                        {
+                            "name": "last_input_text",
+                            "path": "$.data.last_input_text",
+                            "type": "string",
+                            "title": "Last Input Text"
+                        },
+                        {
+                            "name": "optin_phone",
+                            "path": "$.data.optin_phone",
+                            "type": "string",
+                            "title": "Optin Phone"
+                        },
+                        {
+                            "name": "phone",
+                            "path": "$.data.phone",
+                            "type": "string",
+                            "title": "Phone"
+                        },
+                        {
+                            "name": "optin_email",
+                            "path": "$.data.optin_email",
+                            "type": "string",
+                            "title": "Optin Email"
+                        },
+                        {
+                            "name": "email",
+                            "path": "$.data.email",
+                            "type": "string",
+                            "title": "Email"
+                        },
+                        {
+                            "name": "subscribed",
+                            "path": "$.data.subscribed",
+                            "type": "string",
+                            "title": "Subscribed"
+                        },
+                        {
+                            "name": "last_interaction",
+                            "path": "$.data.last_interaction",
+                            "type": "string",
+                            "title": "Last Interaction"
+                        },
+                        {
+                            "name": "last_seen",
+                            "path": "$.data.last_seen",
+                            "type": "string",
+                            "title": "Last Seen"
+                        },
+                        {
+                            "name": "is_followup_enabled",
+                            "path": "$.data.is_followup_enabled",
+                            "type": "string",
+                            "title": "Is Followup Enabled"
+                        }
+                    ],
+                    "payload": null
+                }
+            ],
+            "description": "Return subscriber info match with value"
+        },
+        {
+            "name": "subscriber_send_message",
+            "forms": [
+                {
+                    "name": "subscriber_id",
+                    "type": "number",
+                    "title": "Subscriber Id"
+                },
+                {
+                    "name": "send_message_content",
+                    "type": "string",
+                    "title": "Message Content"
+                },
+                {
+                    "name": "send_message_type",
+                    "type": "string",
+                    "title": "Message Type [text, image, video, audio, file]",
+                    "default": "text"
+                },
+                {
+                    "name": "send_message_tag",
+                    "type": "select",
+                    "title": "Message Tag",
+                    "source": "message_tags",
+                    "default": "ACCOUNT_UPDATE"
+                }
+            ],
+            "title": "Send Direct Message",
+            "guidance": "",
+            "requests": [
+                {
+                    "url": "https://api.manychat.com/fb/sending/sendContent",
+                    "method": "POST",
+                    "headers": [],
+                    "mapping": [
+                        {
+                            "name": "response_status",
+                            "path": "$.status",
+                            "type": "string",
+                            "title": "Response Status"
+                        }
+                    ],
+                    "payload": {
+                        "subscriber_id": "[[subscriber_id]]",
+                        "data": {
+                            "version": "v2",
+                            "content": {
+                                "messages": [
+                                    {
+                                        "type": "[[send_message_type]]",
+                                        "text": "[[send_message_content]]",
+                                        "url": "[[send_message_content]]"
+                                    }
+                                ],
+                                "actions": [],
+                                "quick_replies": []
+                            }
+                        },
+                        "message_tag": "[[send_message_tag]]"
+                    }
+                }
+            ],
+            "description": "Send direct message to subscriber"
+        },
+        {
+            "name": "subscriber_send_message_quick_flow",
+            "forms": [
+                {
+                    "name": "subscriber_id",
+                    "type": "number",
+                    "title": "Subscriber Id"
+                },
+                {
+                    "name": "send_message_content",
+                    "type": "string",
+                    "title": "Message Content"
+                },
+                {
+                    "name": "quick_reply_flow_caption",
+                    "type": "string",
+                    "title": "Quick Reply Caption"
+                },
+                {
+                    "name": "quick_reply_flow_ns",
+                    "type": "select",
+                    "title": "Select Quick Reply Flow",
+                    "source": "flows"
+                },
+                {
+                    "name": "send_message_type",
+                    "type": "string",
+                    "title": "Message Type [text, image, video, audio, file]",
+                    "default": "text"
+                },
+                {
+                    "name": "send_message_tag",
+                    "type": "select",
+                    "title": "Message Tag",
+                    "source": "message_tags",
+                    "default": "ACCOUNT_UPDATE"
+                }
+            ],
+            "title": "Send Message with Quick Reply",
+            "guidance": "",
+            "requests": [
+                {
+                    "url": "https://api.manychat.com/fb/sending/sendContent",
+                    "method": "POST",
+                    "headers": [],
+                    "mapping": [
+                        {
+                            "name": "response_status",
+                            "path": "$.status",
+                            "type": "string",
+                            "title": "Response Status"
+                        }
+                    ],
+                    "payload": {
+                        "subscriber_id": "[[subscriber_id]]",
+                        "data": {
+                            "version": "v2",
+                            "content": {
+                                "messages": [
+                                    {
+                                        "type": "[[send_message_type]]",
+                                        "text": "[[send_message_content]]",
+                                        "url": "[[send_message_content]]"
+                                    }
+                                ],
+                                "actions": [],
+                                "quick_replies": [
+                                    {
+                                        "type": "flow",
+                                        "caption": "[[quick_reply_flow_caption]]",
+                                        "target": "[[quick_reply_flow_ns]]"
+                                    }
+                                ]
+                            }
+                        },
+                        "message_tag": "[[send_message_tag]]"
+                    }
+                }
+            ],
+            "description": "Send message with quick reply flow"
+        },
+        {
+            "name": "subscriber_send_flow_content",
+            "forms": [
+                {
+                    "name": "subscriber_id",
+                    "type": "number",
+                    "title": "Subscriber Id"
+                },
+                {
+                    "name": "send_flow_ns",
+                    "type": "select",
+                    "title": "Select Flow",
+                    "source": "flows"
+                }
+            ],
+            "title": "Send Flow Content",
+            "guidance": "",
+            "requests": [
+                {
+                    "url": "https://api.manychat.com/fb/sending/sendFlow",
+                    "method": "POST",
+                    "headers": [],
+                    "mapping": [
+                        {
+                            "name": "response_status",
+                            "path": "$.status",
+                            "type": "string",
+                            "title": "Response Status"
+                        }
+                    ],
+                    "payload": {
+                        "subscriber_id": "[[subscriber_id]]",
+                        "flow_ns": "[[send_flow_ns]]"
+                    }
+                }
+            ],
+            "description": "Send flow content to subscriber"
+        },
+        {
+            "name": "page_create_custom_field",
+            "forms": [
+                {
+                    "name": "field_name",
+                    "type": "string",
+                    "title": "Field Name"
+                },
+                {
+                    "name": "field_type",
+                    "type": "select",
+                    "title": "Field Type",
+                    "source": "field_types"
+                },
+                {
+                    "name": "field_description",
+                    "type": "string",
+                    "title": "Description",
+                    "default": ""
+                }
+            ],
+            "title": "Create Custom Field",
+            "guidance": "",
+            "requests": [
+                {
+                    "url": "https://api.manychat.com/fb/page/createCustomField",
+                    "method": "POST",
+                    "headers": [],
+                    "mapping": [
+                        {
+                            "name": "field_id",
+                            "path": "$.data.field.id",
+                            "type": "number",
+                            "title": "Field Id"
+                        }
+                    ],
+                    "payload": {
+                        "caption": "[[field_name]]",
+                        "type": "[[field_type]]",
+                        "description": "[[field_description]]"
+                    }
+                }
+            ],
+            "description": "Create new custom field"
+        },
+        {
+            "name": "subscriber_set_custom_field_id",
+            "forms": [
+                {
+                    "name": "subscriber_id",
+                    "type": "string",
+                    "title": "Subscriber Id"
+                },
+                {
+                    "name": "field_id",
+                    "type": "number",
+                    "title": "Enter Custom Field Id ~",
+                    "default": ""
+                },
+                {
+                    "name": "select_field_id",
+                    "type": "select",
+                    "title": "or Select Custom Field ~",
+                    "source": "custom_fields_id",
+                    "default": ""
+                },
+                {
+                    "name": "field_value",
+                    "type": "string",
+                    "title": "Field Value"
+                }
+            ],
+            "title": "Set Custom Field by Id",
+            "guidance": "",
+            "requests": [
+                {
+                    "url": "https://api.manychat.com/fb/subscriber/setCustomField",
+                    "method": "POST",
+                    "headers": [],
+                    "mapping": [
+                        {
+                            "name": "response_status",
+                            "path": "$.status",
+                            "type": "string",
+                            "title": "Response Status"
+                        }
+                    ],
+                    "payload": {
+                        "subscriber_id": "[[subscriber_id]]",
+                        "field_id": "[[field_id]][[select_field_id]]",
+                        "field_value": "[[field_value]]"
+                    }
+                }
+            ],
+            "description": "Set subscriber field by field id"
+        },
+        {
+            "name": "subscriber_set_custom_field_name",
+            "forms": [
+                {
+                    "name": "subscriber_id",
+                    "type": "string",
+                    "title": "Subscriber Id"
+                },
+                {
+                    "name": "field_name",
+                    "type": "string",
+                    "title": "Enter Custom Field Name ~",
+                    "default": ""
+                },
+                {
+                    "name": "select_field_name",
+                    "type": "select",
+                    "title": "or Select Custom Field ~",
+                    "source": "custom_fields_name",
+                    "default": ""
+                },
+                {
+                    "name": "field_value",
+                    "type": "string",
+                    "title": "Field Value"
+                }
+            ],
+            "title": "Set Custom Field by Name",
+            "guidance": "",
+            "requests": [
+                {
+                    "url": "https://api.manychat.com/fb/subscriber/setCustomFieldByName",
+                    "method": "POST",
+                    "headers": [],
+                    "mapping": [
+                        {
+                            "name": "response_status",
+                            "path": "$.status",
+                            "type": "string",
+                            "title": "Response Status"
+                        }
+                    ],
+                    "payload": {
+                        "subscriber_id": "[[subscriber_id]]",
+                        "field_name": "[[field_name]][[select_field_name]]",
+                        "field_value": "[[field_value]]"
+                    }
+                }
+            ],
+            "description": "Set subscriber field by field name"
+        },
+        {
+            "name": "page_create_bot_field",
+            "forms": [
+                {
+                    "name": "bot_field_name",
+                    "type": "string",
+                    "title": "Field Name"
+                },
+                {
+                    "name": "bot_field_type",
+                    "type": "select",
+                    "title": "Field Type",
+                    "source": "field_types"
+                },
+                {
+                    "name": "bot_field_description",
+                    "type": "string",
+                    "title": "Description",
+                    "default": ""
+                },
+                {
+                    "name": "bot_field_value",
+                    "type": "string",
+                    "title": "Value"
+                }
+            ],
+            "title": "Create Bot Field",
+            "guidance": "",
+            "requests": [
+                {
+                    "url": "https://api.manychat.com/fb/page/createBotField",
+                    "method": "POST",
+                    "headers": [],
+                    "mapping": [
+                        {
+                            "name": "bot_field_id",
+                            "path": "$.data.field.id",
+                            "type": "number",
+                            "title": "Field Id"
+                        }
+                    ],
+                    "payload": {
+                        "name": "[[bot_field_name]]",
+                        "type": "[[bot_field_type]]",
+                        "description": "[[bot_field_description]]",
+                        "value": "[[bot_field_value]]"
+                    }
+                }
+            ],
+            "description": "Create new bot field"
+        },
+        {
+            "name": "page_set_bot_field_by_id",
+            "forms": [
+                {
+                    "name": "bot_field_id",
+                    "type": "number",
+                    "title": "Enter Bot Field Id ~",
+                    "default": ""
+                },
+                {
+                    "name": "select_bot_field_id",
+                    "type": "select",
+                    "title": "or Select Bot Field ~",
+                    "source": "bot_fields_id",
+                    "default": ""
+                },
+                {
+                    "name": "bot_field_value",
+                    "type": "string",
+                    "title": "New Value"
+                }
+            ],
+            "title": "Set Bot Field by Id",
+            "guidance": "",
+            "requests": [
+                {
+                    "url": "https://api.manychat.com/fb/page/setBotField",
+                    "method": "POST",
+                    "headers": [],
+                    "mapping": [
+                        {
+                            "name": "response_status",
+                            "path": "$.status",
+                            "type": "string",
+                            "title": "Response Status"
+                        }
+                    ],
+                    "payload": {
+                        "field_id": "[[bot_field_id]][[select_bot_field_id]]",
+                        "field_value": "[[bot_field_value]]"
+                    }
+                }
+            ],
+            "description": "Set bot field value by bot field id"
+        },
+        {
+            "name": "page_set_bot_field_by_name",
+            "forms": [
+                {
+                    "name": "bot_field_name",
+                    "type": "string",
+                    "title": "Enter Bot Field Name ~",
+                    "default": ""
+                },
+                {
+                    "name": "select_bot_field_name",
+                    "type": "select",
+                    "title": "or Select Bot Field ~",
+                    "source": "bot_fields_name",
+                    "default": ""
+                },
+                {
+                    "name": "bot_field_value",
+                    "type": "string",
+                    "title": "New Value"
+                }
+            ],
+            "title": "Set Bot Field by Name",
+            "guidance": "",
+            "requests": [
+                {
+                    "url": "https://api.manychat.com/fb/page/setBotFieldByName",
+                    "method": "POST",
+                    "headers": [],
+                    "mapping": [
+                        {
+                            "name": "response_status",
+                            "path": "$.status",
+                            "type": "string",
+                            "title": "Response Status"
+                        }
+                    ],
+                    "payload": {
+                        "field_name": "[[bot_field_name]][[select_bot_field_name]]",
+                        "field_value": "[[bot_field_value]]"
+                    }
+                }
+            ],
+            "description": "Set bot field value by bot field name"
+        },
+        {
+            "name": "page_create_tag",
+            "forms": [
+                {
+                    "name": "tag_name",
+                    "type": "string",
+                    "title": "New Tag Name"
+                }
+            ],
+            "title": "Create Tag",
+            "guidance": "",
+            "requests": [
+                {
+                    "url": "https://api.manychat.com/fb/page/createTag",
+                    "method": "POST",
+                    "headers": [],
+                    "mapping": [
+                        {
+                            "name": "tag_id",
+                            "path": "$.data.tag.id",
+                            "type": "number",
+                            "title": "Tag Id"
+                        }
+                    ],
+                    "payload": {
+                        "name": "[[tag_name]]"
+                    }
+                }
+            ],
+            "description": "Create new tag"
+        },
+        {
+            "name": "page_remove_tag_id",
+            "forms": [
+                {
+                    "name": "rm_tag_id",
+                    "type": "number",
+                    "title": "Enter Tag Id ~",
+                    "default": ""
+                },
+                {
+                    "name": "select_rm_tag_id",
+                    "type": "select",
+                    "title": "or Select Tag ~",
+                    "source": "tags_id",
+                    "default": ""
+                }
+            ],
+            "title": "Remove Tag by Id",
+            "guidance": "",
+            "requests": [
+                {
+                    "url": "https://api.manychat.com/fb/page/removeTag",
+                    "method": "POST",
+                    "headers": [],
+                    "mapping": [
+                        {
+                            "name": "response_status",
+                            "path": "$.status",
+                            "type": "string",
+                            "title": "Response Status"
+                        }
+                    ],
+                    "payload": {
+                        "tag_id": "[[rm_tag_id]][[select_rm_tag_id]]"
+                    }
+                }
+            ],
+            "description": "Remove tag by tag id"
+        },
+        {
+            "name": "page_remove_tag_name",
+            "forms": [
+                {
+                    "name": "rm_tag_name",
+                    "type": "string",
+                    "title": "Enter Tag Name ~",
+                    "default": ""
+                },
+                {
+                    "name": "select_rm_tag_name",
+                    "type": "select",
+                    "title": "or Select Tag ~",
+                    "source": "tags_name",
+                    "default": ""
+                }
+            ],
+            "title": "Remove Tag by Name",
+            "guidance": "",
+            "requests": [
+                {
+                    "url": "https://api.manychat.com/fb/page/removeTagByName",
+                    "method": "POST",
+                    "headers": [],
+                    "mapping": [
+                        {
+                            "name": "response_status",
+                            "path": "$.status",
+                            "type": "string",
+                            "title": "Response Status"
+                        }
+                    ],
+                    "payload": {
+                        "tag_name": "[[rm_tag_name]][[select_rm_tag_name]]"
+                    }
+                }
+            ],
+            "description": "Remove tag by tag name"
+        },
+        {
+            "name": "subscriber_add_tag",
+            "forms": [
+                {
+                    "name": "subscriber_id",
+                    "type": "number",
+                    "title": "Subscriber Id"
+                },
+                {
+                    "name": "tag_id",
+                    "type": "number",
+                    "title": "Enter Tag Id ~",
+                    "default": ""
+                },
+                {
+                    "name": "select_tag_id",
+                    "type": "select",
+                    "title": "or Select Tag ~",
+                    "source": "tags_id",
+                    "default": ""
+                }
+            ],
+            "title": "Add Subscriber Tag by Id",
+            "guidance": "",
+            "requests": [
+                {
+                    "url": "https://api.manychat.com/fb/subscriber/addTag",
+                    "method": "POST",
+                    "headers": [],
+                    "mapping": [
+                        {
+                            "name": "response_status",
+                            "path": "$.status",
+                            "type": "string",
+                            "title": "Response Status"
+                        }
+                    ],
+                    "payload": {
+                        "subscriber_id": "[[subscriber_id]]",
+                        "tag_id": "[[tag_id]][[select_tag_id]]"
+                    }
+                }
+            ],
+            "description": "Add tag to subscriber by tag id"
+        },
+        {
+            "name": "subscriber_add_tag_name",
+            "forms": [
+                {
+                    "name": "subscriber_id",
+                    "type": "number",
+                    "title": "Subscriber Id"
+                },
+                {
+                    "name": "tag_name",
+                    "type": "string",
+                    "title": "Enter Tag Name ~",
+                    "default": ""
+                },
+                {
+                    "name": "select_tag_name",
+                    "type": "select",
+                    "title": "or Select Tag ~",
+                    "source": "tags_name",
+                    "default": ""
+                }
+            ],
+            "title": "Add Subscriber Tag by Name",
+            "guidance": "",
+            "requests": [
+                {
+                    "url": "https://api.manychat.com/fb/subscriber/addTagByName",
+                    "method": "POST",
+                    "headers": [],
+                    "mapping": [
+                        {
+                            "name": "response_status",
+                            "path": "$.status",
+                            "type": "string",
+                            "title": "Response Status"
+                        }
+                    ],
+                    "payload": {
+                        "subscriber_id": "[[subscriber_id]]",
+                        "tag_name": "[[tag_name]][[select_tag_name]]"
+                    }
+                }
+            ],
+            "description": "Add tag to subscriber by tag name"
+        },
+        {
+            "name": "subscriber_remove_tag_id",
+            "forms": [
+                {
+                    "name": "subscriber_id",
+                    "type": "number",
+                    "title": "Subscriber Id"
+                },
+                {
+                    "name": "tag_id",
+                    "type": "number",
+                    "title": "Enter Tag Id ~",
+                    "default": ""
+                },
+                {
+                    "name": "select_tag_id",
+                    "type": "select",
+                    "title": "or Select Tag ~",
+                    "source": "tags_id",
+                    "default": ""
+                }
+            ],
+            "title": "Remove Subscriber Tag by Id",
+            "guidance": "",
+            "requests": [
+                {
+                    "url": "https://api.manychat.com/fb/subscriber/removeTag",
+                    "method": "POST",
+                    "headers": [],
+                    "mapping": [
+                        {
+                            "name": "response_status",
+                            "path": "$.status",
+                            "type": "string",
+                            "title": "Response Status"
+                        }
+                    ],
+                    "payload": {
+                        "subscriber_id": "[[subscriber_id]]",
+                        "tag_id": "[[tag_id]][[select_tag_id]]"
+                    }
+                }
+            ],
+            "description": "Remove tag to subscriber by tag id"
+        },
+        {
+            "name": "subscriber_remove_tag_name",
+            "forms": [
+                {
+                    "name": "subscriber_id",
+                    "type": "number",
+                    "title": "Subscriber Id"
+                },
+                {
+                    "name": "tag_name",
+                    "type": "string",
+                    "title": "Enter Tag Name ~",
+                    "default": ""
+                },
+                {
+                    "name": "select_tag_name",
+                    "type": "select",
+                    "title": "or Select Tag ~",
+                    "source": "tags_name",
+                    "default": ""
+                }
+            ],
+            "title": "Remove Subscriber Tag by Name",
+            "guidance": "",
+            "requests": [
+                {
+                    "url": "https://api.manychat.com/fb/subscriber/removeTagByName",
+                    "method": "POST",
+                    "headers": [],
+                    "mapping": [
+                        {
+                            "name": "response_status",
+                            "path": "$.status",
+                            "type": "string",
+                            "title": "Response Status"
+                        }
+                    ],
+                    "payload": {
+                        "subscriber_id": "[[subscriber_id]]",
+                        "tag_name": "[[tag_name]][[select_tag_name]]"
+                    }
+                }
+            ],
+            "description": "Remove tag to subscriber by tag name"
+        }
+    ],
+    "sources": [
+        {
+            "name": "field_types",
+            "type": "enum:static",
+            "list": [
+                {
+                    "key": "Number",
+                    "value": "number"
+                },
+                {
+                    "key": "Text",
+                    "value": "text"
+                },
+                {
+                    "key": "Date",
+                    "value": "date"
+                },
+                {
+                    "key": "DateTime",
+                    "value": "datetime"
+                },
+                {
+                    "key": "Boolean",
+                    "value": "boolean"
+                }
+            ]
+        },
+        {
+            "name": "message_tags",
+            "type": "enum:static",
+            "list": [
+                {
+                    "key": "Confirmed Event Update",
+                    "value": "CONFIRMED_EVENT_UPDATE"
+                },
+                {
+                    "key": "Post-Purchase Update",
+                    "value": "POST_PURCHASE_UPDATE"
+                },
+                {
+                    "key": "Account Update",
+                    "value": "ACCOUNT_UPDATE"
+                }
+            ]
+        },
+        {
+            "name": "flows",
+            "type": "enum:rpc",
+            "request": {
+                "url": "https://api.manychat.com/fb/page/getFlows",
+                "method": "GET",
+                "headers": [],
+                "mapping": [
+                    {
+                        "type": "select",
+                        "path": "$.data.flows",
+                        "key": "$.name",
+                        "value": "$.ns"
+                    }
+                ],
+                "payload": null
+            }
+        },
+        {
+            "name": "custom_fields_id",
+            "type": "enum:rpc",
+            "request": {
+                "url": "https://api.manychat.com/fb/page/getCustomFields",
+                "method": "GET",
+                "headers": [],
+                "mapping": [
+                    {
+                        "type": "select",
+                        "path": "$.data",
+                        "key": "$.name",
+                        "value": "$.id"
+                    }
+                ],
+                "payload": null
+            }
+        },
+        {
+            "name": "custom_fields_name",
+            "type": "enum:rpc",
+            "request": {
+                "url": "https://api.manychat.com/fb/page/getCustomFields",
+                "method": "GET",
+                "headers": [],
+                "mapping": [
+                    {
+                        "type": "select",
+                        "path": "$.data",
+                        "key": "$.name",
+                        "value": "$.name"
+                    }
+                ],
+                "payload": null
+            }
+        },
+        {
+            "name": "bot_fields_id",
+            "type": "enum:rpc",
+            "request": {
+                "url": "https://api.manychat.com/fb/page/getBotFields",
+                "method": "GET",
+                "headers": [],
+                "mapping": [
+                    {
+                        "type": "select",
+                        "path": "$.data",
+                        "key": "$.name",
+                        "value": "$.id"
+                    }
+                ],
+                "payload": null
+            }
+        },
+        {
+            "name": "bot_fields_name",
+            "type": "enum:rpc",
+            "request": {
+                "url": "https://api.manychat.com/fb/page/getBotFields",
+                "method": "GET",
+                "headers": [],
+                "mapping": [
+                    {
+                        "type": "select",
+                        "path": "$.data",
+                        "key": "$.name",
+                        "value": "$.name"
+                    }
+                ],
+                "payload": null
+            }
+        },
+        {
+            "name": "tags_id",
+            "type": "enum:rpc",
+            "request": {
+                "url": "https://api.manychat.com/fb/page/getTags",
+                "method": "GET",
+                "headers": [],
+                "mapping": [
+                    {
+                        "type": "select",
+                        "path": "$.data",
+                        "key": "$.name",
+                        "value": "$.id"
+                    }
+                ],
+                "payload": null
+            }
+        },
+        {
+            "name": "tags_name",
+            "type": "enum:rpc",
+            "request": {
+                "url": "https://api.manychat.com/fb/page/getTags",
+                "method": "GET",
+                "headers": [],
+                "mapping": [
+                    {
+                        "type": "select",
+                        "path": "$.data",
+                        "key": "$.name",
+                        "value": "$.name"
+                    }
+                ],
+                "payload": null
+            }
+        }
+    ]
+}
